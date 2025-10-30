@@ -1,0 +1,25 @@
+---
+import { Menu } from "@/components/shared/Menu";
+import "@/styles/global.css";
+
+const links = Array.from({ length: 10 }, (_, i) => ({
+  url: `/#section-${i + 1}`,
+  label: `Section ${i + 1}`,
+}));
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Learning GSAP</title>
+  </head>
+  <body
+    class="flex flex-col min-w-screen min-h-screen bg-neutral-950 text-white"
+  >
+    <Menu client:load links={links} />
+    <slot />
+  </body>
+</html>
