@@ -137,19 +137,19 @@ const CloseOrOpenMenu: React.FC<{ isOpen: boolean; onToggle: () => void }> = ({
   return (
     <button
       onClick={onToggle}
-      className="flex bg-neutral-50 rounded-full relative size-15 cursor-pointer"
+      className="flex bg-neutral-50 rounded-full relative size-10 cursor-pointer"
     >
       <div
         ref={line1Ref}
-        className="block w-8 h-1 bg-neutral-950 rounded-sm absolute top-5 left-3.5"
+        className="block w-6 h-1 bg-neutral-950 rounded-sm absolute top-2.5 left-2"
       />
       <div
         ref={line2Ref}
-        className="block w-8 h-1 bg-neutral-950 rounded-sm absolute top-7 left-3.5"
+        className="block w-6 h-1 bg-neutral-950 rounded-sm absolute top-4.5 left-2"
       />
       <div
         ref={line3Ref}
-        className="block w-8 h-1 bg-neutral-950 rounded-sm absolute top-9 left-3.5"
+        className="block w-6 h-1 bg-neutral-950 rounded-sm absolute top-6.5 left-2"
       />
     </button>
   );
