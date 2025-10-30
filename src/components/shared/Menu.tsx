@@ -14,7 +14,7 @@ export const Menu: React.FC<Props> = ({ links }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const linksRef = useRef<HTMLDivElement>(null);
-  const [isOpen, setisOpen] = useState(true);
+  const [isOpen, setisOpen] = useState(false);
 
   useGSAP(() => {
     const tl = gsap.timeline({
