@@ -147,7 +147,7 @@ const IndexComponent: React.FC<Props> = ({ links = [] }) => {
           <footer className="footer mt-24 opacity-0">
             <div className="h-px bg-linear-to-r from-transparent via-neutral-800 to-transparent mb-8"></div>
             <p className="text-center text-sm text-neutral-600 tracking-wide">
-              Scroll para explorar · Animado con GSAP
+              Animado con GSAP
             </p>
           </footer>
         </div>
