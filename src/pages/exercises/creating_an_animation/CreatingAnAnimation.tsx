@@ -21,6 +21,7 @@ const CreatingAnAnimation = () => {
   const [duration, setDuration] = useState(300);
   const cubeRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const durationRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
     gsap.set(cubeRef.current, {
@@ -29,6 +30,14 @@ const CreatingAnAnimation = () => {
       width: 96,
       height: 96,
     });
+  }, []);
+
+  useGSAP(() => {
+    gsap.fromTo(
+      durationRef.current,
+      { opacity: 0, scale: 0.95 },
+      { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.7)" }
+    );
   }, []);
 
   const handleRunAnimation = useCallback(() => {
@@ -89,7 +98,7 @@ const CreatingAnAnimation = () => {
       </section>
 
       <section className="flex gap-4 justify-end w-full">
-        <div className="relative">
+        <div ref={durationRef} className="relative opacity-0">
           <input
             type="number"
             min="0"
