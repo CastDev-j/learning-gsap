@@ -91,7 +91,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
           />
           <div
             ref={dropdownRef}
-            className="absolute z-30 mt-1 w-full bg-neutral-900 border border-neutral-800 rounded-md shadow-lg max-h-60 overflow-auto"
+            className="opacity-0 absolute z-30 mt-1 w-full bg-neutral-900 border border-neutral-800 rounded-md shadow-lg max-h-60 overflow-auto"
           >
             {options.map((option) => (
               <button
@@ -203,7 +203,10 @@ const SelectEasing: React.FC<SelectEasingProps> = ({
   const displayValue = currentType === "none" ? "linear" : value;
 
   return (
-    <div ref={ref} className={cn("flex gap-3 items-center", className)}>
+    <div
+      ref={ref}
+      className={cn("opacity-0 flex gap-3 items-center", className)}
+    >
       <span className="text-xs text-neutral-500 font-mono mr-auto">
         {displayValue}
       </span>

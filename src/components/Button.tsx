@@ -66,7 +66,7 @@ const Button: React.FC<ButtonProps> = ({
   };
 
   const baseClass =
-    "font-medium rounded-md transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2";
+    "opacity-0 font-medium rounded-md transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2";
 
   const variantClass = {
     primary:

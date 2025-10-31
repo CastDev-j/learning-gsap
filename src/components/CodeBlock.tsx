@@ -156,7 +156,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
     <div
       ref={ref}
       className={cn(
-        "relative my-4 rounded-lg overflow-hidden w-full border border-neutral-800",
+        "opacity-0 relative my-4 rounded-lg overflow-hidden w-full border border-neutral-800",
         className
       )}
     >

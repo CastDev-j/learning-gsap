@@ -25,7 +25,7 @@ const Title: React.FC<React.PropsWithChildren<TitleProps>> = ({
     );
   }, []);
 
-  const base = "font-bold text-neutral-100 tracking-tight";
+  const base = "opacity-0 font-bold text-neutral-100 tracking-tight";
 
   const variantClass =
     variant === "page"

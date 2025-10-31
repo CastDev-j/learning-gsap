@@ -39,7 +39,7 @@ const Comment: React.FC<CommentProps> = ({
     <aside
       ref={ref}
       className={cn(
-        "px-6 py-4 w-fit bg-neutral-900 border border-neutral-800 rounded-md text-sm text-neutral-400",
+        "opacity-0 px-6 py-4 w-fit bg-neutral-900 border border-neutral-800 rounded-md text-sm text-neutral-400",
         className
       )}
     >

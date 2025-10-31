@@ -32,7 +32,10 @@ const Selection: React.FC<SelectionProps> = ({
   }, []);
 
   return (
-    <div ref={ref} className={cn("inline-flex gap-2 flex-wrap", className)}>
+    <div
+      ref={ref}
+      className={cn("opacity-0 inline-flex gap-2 flex-wrap", className)}
+    >
       {options.map((option) => (
         <button
           key={option.value}
