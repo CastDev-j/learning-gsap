@@ -72,10 +72,6 @@ const IndexComponent: React.FC<Props> = ({ links = [] }) => {
             linear-gradient(90deg, rgba(115, 115, 115, 0.03) 1px, transparent 1px);
           background-size: 60px 60px;
         }
-
-        .link-card:hover .link-bg {
-          width: 100%;
-        }
       `}</style>
 
       <div className="grid-bg fixed inset-0 opacity-0 z-0"></div>
@@ -138,7 +134,7 @@ const IndexComponent: React.FC<Props> = ({ links = [] }) => {
                       strokeLinejoin="round"
                     />
                   </svg>
-                  <div className="link-bg absolute inset-0 w-0 bg-neutral-900 transition-all duration-400" />
+                  <div className="absolute inset-0 w-0 bg-neutral-900 transition-all duration-300 group-hover:w-full" />
                 </a>
               ))}
             </div>

@@ -11,8 +11,8 @@ export const links: Link[] = [
     url: "/",
   },
   {
-    label: "Página de Ejemplo",
-    url: "/exercises/example",
+    label: "Creando una animación",
+    url: "/exercises/creating_an_animation",
   },
   ...testLinks,
 ];
