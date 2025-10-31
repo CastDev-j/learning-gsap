@@ -167,7 +167,7 @@ const CreatingAnAnimation = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center gap-8 px-8 max-w-4xl w-full">
+    <div className="flex flex-col items-center justify-center gap-8 px-4 max-w-4xl w-full">
       <section className="text-center space-y-2">
         <Title>Creando una animación</Title>
         <Paragraph>
