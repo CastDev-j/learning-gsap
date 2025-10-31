@@ -111,7 +111,7 @@ const IndexComponent: React.FC<Props> = ({ links = [] }) => {
             <h2 className="nav-title text-xs uppercase tracking-widest text-neutral-600 mb-8 opacity-0">
               Explorar proyectos
             </h2>
-            <div className="grid gap-px bg-neutral-950 border border-neutral-950">
+            <div className="grid gap-px bg-neutral-950 border border-neutral-900">
               {links.slice(1, 4).map((link, i) => (
                 <a
                   key={link.url}
