@@ -2,10 +2,14 @@
 import { Menu } from "@/components/shared/Menu";
 import "@/styles/global.css";
 
-const links = Array.from({ length: 10 }, (_, i) => ({
-  url: `/#section-${i + 1}`,
-  label: `Section ${i + 1}`,
-}));
+import { links } from "@/config.ts";
+import { ClientRouter } from "astro:transitions";
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
 ---
 
 <html lang="en">
@@ -14,7 +18,8 @@ const links = Array.from({ length: 10 }, (_, i) => ({
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <title>Learning GSAP</title>
+    <ClientRouter />
+    <title>{title}</title>
   </head>
   <body
     class="flex flex-col min-w-screen min-h-screen bg-neutral-950 text-white"

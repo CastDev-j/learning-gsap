@@ -1,14 +1,10 @@
 ---
 import Layout from "@/layout/Layout.astro";
+import IndexComponent from "./IndexComponent";
+
+import { links } from "@/config.ts";
 ---
 
-<Layout>
-  <div
-    class="w-screen h-screen flex items-center justify-center flex-col gap-4 px-4"
-  >
-    <h1 class="text-3xl font-bold animate-pulse text-center">
-      Biblioteca de mis trabajos con GSAP
-    </h1>
-    <p class="animate-pulse text-center">En desarrollo...</p>
-  </div>
+<Layout title="Learning GSAP">
+  <IndexComponent links={links} client:load />
 </Layout>

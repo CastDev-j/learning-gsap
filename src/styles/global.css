@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+@view-transition {
+    navigation: auto;
+}
+
 .disable-scroll::-webkit-scrollbar {
     display: none;
 }
