@@ -1,8 +1,9 @@
 ---
 import Layout from "@/layout/Layout.astro";
 import CreatingAnAnimation from "./CreatingAnAnimation";
+import CreatingAnAnimationRawCode from "./CreatingAnAnimation?raw";
 ---
 
 <Layout title="Learning GSAP | Creando una animación" centered={true}>
-  <CreatingAnAnimation client:load />
+  <CreatingAnAnimation client:load rawCode={CreatingAnAnimationRawCode} />
 </Layout>
