@@ -34,9 +34,7 @@ const CreatingAnAnimation: React.FC<Props> = ({ rawCode }) => {
     const objetiveWidth = baseSize * 0.75;
     const maxX = containerWidth - objetiveWidth;
 
-    const tl = gsap.timeline();
-
-    tl.to(cubeRef.current, {
+    gsap.to(cubeRef.current, {
       x: maxX,
       ease: easing,
       backgroundColor: "#ec4899",

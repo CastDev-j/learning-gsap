@@ -60,9 +60,7 @@ const Staggers: React.FC<Props> = ({ rawCode }) => {
     const containerHeight = containerRef.current.offsetHeight;
     const maxY = containerHeight - baseSize;
 
-    const tl = gsap.timeline();
-
-    tl.to(cubeRefs.current, {
+    gsap.to(cubeRefs.current, {
       y: maxY,
       ease: easing,
       backgroundColor: "#ec4899",
