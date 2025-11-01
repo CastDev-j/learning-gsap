@@ -23,33 +23,36 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   const ref = useRef<HTMLButtonElement>(null);
 
-  useGSAP(() => {
-    gsap.fromTo(
-      ref.current,
-      { opacity: 0, scale: 0.95 },
-      { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.7)" }
-    );
-  }, []);
+  const { contextSafe } = useGSAP(
+    () => {
+      gsap.fromTo(
+        ref.current,
+        { opacity: 0, scale: 0.95 },
+        { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.7)" }
+      );
+    },
+    { scope: ref }
+  );
 
-  const handleHover = () => {
+  const handleHover = contextSafe(() => {
     if (disabled) return;
     gsap.to(ref.current, {
       scale: 1.05,
       duration: 0.2,
       ease: "power2.out",
     });
-  };
+  });
 
-  const handleHoverEnd = () => {
+  const handleHoverEnd = contextSafe(() => {
     if (disabled) return;
     gsap.to(ref.current, {
       scale: 1,
       duration: 0.2,
       ease: "power2.out",
     });
-  };
+  });
 
-  const handleClick = () => {
+  const handleClick = contextSafe(() => {
     if (disabled) return;
     gsap.to(ref.current, {
       scale: 0.95,
@@ -63,7 +66,7 @@ const Button: React.FC<ButtonProps> = ({
         });
       },
     });
-  };
+  });
 
   const baseClass =
     "opacity-0 font-medium rounded-md transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2";

@@ -127,12 +127,7 @@ const UsingTimeLines: React.FC<Props> = ({ rawCode }) => {
 
   useEffect(() => {
     return () => {
-      if (timeline1Ref.current) {
-        timeline1Ref.current.kill();
-      }
-      if (timeline2Ref.current) {
-        timeline2Ref.current.kill();
-      }
+      killTimelines();
     };
   }, []);
 

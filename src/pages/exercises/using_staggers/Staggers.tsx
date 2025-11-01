@@ -1,10 +1,4 @@
-import React, {
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { useLayoutEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import Title from "@/components/Title";
 import Paragraph from "@/components/Paragraph";
@@ -32,19 +26,22 @@ const Staggers: React.FC<Props> = ({ rawCode }) => {
   const baseSize = 36;
   const [cubeAmount, setCubeAmount] = useState(0);
 
-  useGSAP(() => {
-    gsap.fromTo(
-      staggerRef.current,
-      { opacity: 0, scale: 0.95 },
-      { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.7)" }
-    );
+  const { contextSafe } = useGSAP(
+    () => {
+      gsap.fromTo(
+        staggerRef.current,
+        { opacity: 0, scale: 0.95 },
+        { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.7)" }
+      );
 
-    gsap.fromTo(
-      durationRef.current,
-      { opacity: 0, scale: 0.95 },
-      { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.7)" }
-    );
-  }, []);
+      gsap.fromTo(
+        durationRef.current,
+        { opacity: 0, scale: 0.95 },
+        { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.7)" }
+      );
+    },
+    { scope: containerRef }
+  );
 
   useLayoutEffect(() => {
     const updateCubeAmount = () => {
@@ -64,7 +61,7 @@ const Staggers: React.FC<Props> = ({ rawCode }) => {
     };
   }, []);
 
-  const handleRunAnimation = useCallback(() => {
+  const handleRunAnimation = contextSafe(() => {
     if (!cubeRefs.current || !containerRef.current) return;
 
     const containerHeight = containerRef.current.offsetHeight;
@@ -81,9 +78,9 @@ const Staggers: React.FC<Props> = ({ rawCode }) => {
         grid: "auto",
       },
     });
-  }, [easing, duration, stagger, staggerFrom]);
+  });
 
-  const handleResetAnimation = useCallback(() => {
+  const handleResetAnimation = contextSafe(() => {
     if (!cubeRefs.current || !containerRef.current) return;
 
     gsap.to(cubeRefs.current, {
@@ -97,7 +94,7 @@ const Staggers: React.FC<Props> = ({ rawCode }) => {
         grid: "auto",
       },
     });
-  }, [easing, duration, stagger, staggerFrom]);
+  });
 
   const handleDurationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newDuration = parseInt(e.target.value, 10);

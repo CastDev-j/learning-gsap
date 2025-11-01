@@ -32,96 +32,102 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
   const [copied, setCopied] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
 
-  useGSAP(() => {
-    gsap.fromTo(
-      ref.current,
-      { opacity: 0, y: 8 },
-      { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }
-    );
-  }, []);
+  useGSAP(
+    () => {
+      gsap.fromTo(
+        ref.current,
+        { opacity: 0, y: 8 },
+        { opacity: 1, y: 0, duration: 0.45, ease: "power2.out" }
+      );
+    },
+    { scope: ref }
+  );
 
-  useGSAP(() => {
-    gsap.registerPlugin(MorphSVGPlugin);
+  useGSAP(
+    () => {
+      gsap.registerPlugin(MorphSVGPlugin);
 
-    if (copied && morphPathRef.current && checkPathRef.current) {
-      const tl = gsap.timeline();
+      if (copied && morphPathRef.current && checkPathRef.current) {
+        const tl = gsap.timeline();
 
-      tl.to(buttonRef.current, {
-        scale: 0.95,
-        duration: 0.1,
-      })
-        .to(buttonRef.current, {
-          scale: 1,
-          backgroundColor: "#6366f1",
-          duration: 0.3,
-          ease: "back.out(2)",
+        tl.to(buttonRef.current, {
+          scale: 0.95,
+          duration: 0.1,
         })
-        .to(
-          iconRef.current,
-          {
-            rotation: 360,
-            scale: 1.15,
-            duration: 0.5,
-            ease: "back.out(1.7)",
-          },
-          0.1
-        )
-        .to(
-          morphPathRef.current,
-          {
-            morphSVG: checkPathRef.current,
-            duration: 0.4,
-            ease: "power2.inOut",
-          },
-          0.15
-        )
-        .to(
-          rectRef.current,
-          {
-            opacity: 0,
-            scale: 0.8,
-            duration: 0.3,
-          },
-          0.15
-        );
-    } else if (buttonRef.current && iconRef.current && morphPathRef.current) {
-      const tl = gsap.timeline();
-
-      tl.to(iconRef.current, {
-        rotation: 0,
-        scale: 1,
-        duration: 0.4,
-        ease: "power2.inOut",
-      })
-        .to(
-          morphPathRef.current,
-          {
-            morphSVG: morphPathRef.current,
-            duration: 0.4,
-            ease: "power2.inOut",
-          },
-          0
-        )
-        .to(
-          rectRef.current,
-          {
-            opacity: 1,
+          .to(buttonRef.current, {
             scale: 1,
+            backgroundColor: "#6366f1",
             duration: 0.3,
-          },
-          0
-        )
-        .to(
-          buttonRef.current,
-          {
-            backgroundColor: "#262626",
-            duration: 0.3,
-          },
-          0
-        )
-        .call(() => setIsAnimating(false));
-    }
-  }, [copied]);
+            ease: "back.out(2)",
+          })
+          .to(
+            iconRef.current,
+            {
+              rotation: 360,
+              scale: 1.15,
+              duration: 0.5,
+              ease: "back.out(1.7)",
+            },
+            0.1
+          )
+          .to(
+            morphPathRef.current,
+            {
+              morphSVG: checkPathRef.current,
+              duration: 0.4,
+              ease: "power2.inOut",
+            },
+            0.15
+          )
+          .to(
+            rectRef.current,
+            {
+              opacity: 0,
+              scale: 0.8,
+              duration: 0.3,
+            },
+            0.15
+          );
+      } else if (buttonRef.current && iconRef.current && morphPathRef.current) {
+        const tl = gsap.timeline();
+
+        tl.to(iconRef.current, {
+          rotation: 0,
+          scale: 1,
+          duration: 0.4,
+          ease: "power2.inOut",
+        })
+          .to(
+            morphPathRef.current,
+            {
+              morphSVG: morphPathRef.current,
+              duration: 0.4,
+              ease: "power2.inOut",
+            },
+            0
+          )
+          .to(
+            rectRef.current,
+            {
+              opacity: 1,
+              scale: 1,
+              duration: 0.3,
+            },
+            0
+          )
+          .to(
+            buttonRef.current,
+            {
+              backgroundColor: "#262626",
+              duration: 0.3,
+            },
+            0
+          )
+          .call(() => setIsAnimating(false));
+      }
+    },
+    { scope: ref, dependencies: [copied] }
+  );
 
   const handleCopy = async () => {
     if (isAnimating) return;

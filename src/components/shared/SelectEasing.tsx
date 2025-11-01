@@ -40,15 +40,18 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  useGSAP(() => {
-    if (isOpen && dropdownRef.current) {
-      gsap.fromTo(
-        dropdownRef.current,
-        { opacity: 0, y: -8, scale: 0.95 },
-        { opacity: 1, y: 0, scale: 1, duration: 0.2, ease: "power2.out" }
-      );
-    }
-  }, [isOpen]);
+  useGSAP(
+    () => {
+      if (isOpen && dropdownRef.current) {
+        gsap.fromTo(
+          dropdownRef.current,
+          { opacity: 0, y: -8, scale: 0.95 },
+          { opacity: 1, y: 0, scale: 1, duration: 0.2, ease: "power2.out" }
+        );
+      }
+    },
+    { scope: dropdownRef, dependencies: [isOpen] }
+  );
 
   const handleSelect = (optionValue: string) => {
     onChange(optionValue);
@@ -151,13 +154,16 @@ const SelectEasing: React.FC<SelectEasingProps> = ({
     steps: currentSteps,
   } = parseEasing(value);
 
-  useGSAP(() => {
-    gsap.fromTo(
-      ref.current,
-      { opacity: 0, y: 6 },
-      { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }
-    );
-  }, []);
+  useGSAP(
+    () => {
+      gsap.fromTo(
+        ref.current,
+        { opacity: 0, y: 6 },
+        { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }
+      );
+    },
+    { scope: ref }
+  );
 
   const handleTypeChange = (newType: string) => {
     if (newType === "none") {

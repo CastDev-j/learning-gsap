@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { gsap } from "gsap";
 import Title from "@/components/Title";
 import Paragraph from "@/components/Paragraph";
@@ -19,21 +19,24 @@ const CreatingAnAnimation: React.FC<Props> = ({ rawCode }) => {
   const durationRef = useRef<HTMLDivElement>(null);
   const baseSize = 96;
 
-  useGSAP(() => {
-    gsap.fromTo(
-      durationRef.current,
-      { opacity: 0, scale: 0.95 },
-      { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.7)" }
-    );
+  const { contextSafe } = useGSAP(
+    () => {
+      gsap.fromTo(
+        durationRef.current,
+        { opacity: 0, scale: 0.95 },
+        { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.7)" }
+      );
 
-    gsap.fromTo(
-      cubeRef.current,
-      { opacity: 0, scale: 0.95 },
-      { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.7)" }
-    );
-  }, []);
+      gsap.fromTo(
+        cubeRef.current,
+        { opacity: 0, scale: 0.95 },
+        { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.7)" }
+      );
+    },
+    { scope: containerRef }
+  );
 
-  const handleRunAnimation = useCallback(() => {
+  const handleRunAnimation = contextSafe(() => {
     if (!cubeRef.current || !containerRef.current) return;
 
     const containerWidth = containerRef.current.offsetWidth;
@@ -47,9 +50,9 @@ const CreatingAnAnimation: React.FC<Props> = ({ rawCode }) => {
       duration: duration / 1000,
       height: baseSize,
     });
-  }, [easing, duration]);
+  });
 
-  const handleResetAnimation = useCallback(() => {
+  const handleResetAnimation = contextSafe(() => {
     if (!cubeRef.current || !containerRef.current) return;
 
     gsap.to(cubeRef.current, {
@@ -60,7 +63,7 @@ const CreatingAnAnimation: React.FC<Props> = ({ rawCode }) => {
       width: baseSize,
       duration: duration / 1000,
     });
-  }, [easing, duration]);
+  });
 
   const handleDurationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newDuration = parseInt(e.target.value, 10);

@@ -18,13 +18,16 @@ const Remark: React.FC<RemarkProps> = ({
 }) => {
   const ref = useRef<HTMLSpanElement>(null);
 
-  useGSAP(() => {
-    gsap.fromTo(
-      ref.current,
-      { opacity: 0, y: 4 },
-      { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }
-    );
-  }, []);
+  useGSAP(
+    () => {
+      gsap.fromTo(
+        ref.current,
+        { opacity: 0, y: 4 },
+        { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }
+      );
+    },
+    { scope: ref }
+  );
 
   return (
     <span

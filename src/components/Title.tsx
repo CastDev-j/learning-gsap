@@ -37,7 +37,6 @@ const Title: React.FC<React.PropsWithChildren<TitleProps>> = ({
   const Tag = `h${level}` as React.ElementType;
 
   return (
-    // using any for ref because Tag is dynamic
     <Tag ref={ref as any} className={cn(base, variantClass, className)}>
       {children}
     </Tag>

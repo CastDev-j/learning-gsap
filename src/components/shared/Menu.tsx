@@ -19,59 +19,62 @@ export const Menu: React.FC<Props> = ({ links }) => {
   const overlayRef = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState(false);
 
-  useGSAP(() => {
-    const tl = gsap.timeline({
-      defaults: { ease: "power3.inOut" },
-    });
+  useGSAP(
+    () => {
+      const tl = gsap.timeline({
+        defaults: { ease: "power3.inOut" },
+      });
 
-    if (isOpen) {
-      tl.to(overlayRef.current, {
-        opacity: 1,
-        duration: 0.3,
-      })
-        .to(
-          menuRef.current,
-          {
-            x: "0%",
-            duration: 0.5,
-          },
-          0.1
-        )
-        .to(
-          linksRef.current,
-          {
-            opacity: 1,
-            x: 0,
-            duration: 0.4,
-            stagger: 0.05,
-          },
-          0.3
-        );
-    } else {
-      tl.to(linksRef.current, {
-        opacity: 0,
-        x: -20,
-        duration: 0.3,
-        stagger: 0.03,
-      })
-        .to(
-          menuRef.current,
-          {
-            x: "100%",
-            duration: 0.5,
-          },
-          0.2
-        )
-        .to(
-          overlayRef.current,
-          {
-            opacity: 0,
-            duration: 0.3,
-          },
-          0.2
-        );
-    }
-  }, [isOpen]);
+      if (isOpen) {
+        tl.to(overlayRef.current, {
+          opacity: 1,
+          duration: 0.3,
+        })
+          .to(
+            menuRef.current,
+            {
+              x: "0%",
+              duration: 0.5,
+            },
+            0.1
+          )
+          .to(
+            linksRef.current,
+            {
+              opacity: 1,
+              x: 0,
+              duration: 0.4,
+              stagger: 0.05,
+            },
+            0.3
+          );
+      } else {
+        tl.to(linksRef.current, {
+          opacity: 0,
+          x: -20,
+          duration: 0.3,
+          stagger: 0.03,
+        })
+          .to(
+            menuRef.current,
+            {
+              x: "100%",
+              duration: 0.5,
+            },
+            0.2
+          )
+          .to(
+            overlayRef.current,
+            {
+              opacity: 0,
+              duration: 0.3,
+            },
+            0.2
+          );
+      }
+    },
+    { scope: containerRef, dependencies: [isOpen] }
+  );
 
   const handleMenuToggle = () => {
     setIsOpen(!isOpen);
@@ -162,47 +165,39 @@ const CloseOrOpenMenu: React.FC<{ isOpen: boolean; onToggle: () => void }> = ({
   const line1Ref = useRef<HTMLDivElement>(null);
   const line2Ref = useRef<HTMLDivElement>(null);
   const line3Ref = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
-  useGSAP(() => {
-    const tl = gsap.timeline({
-      defaults: { duration: 0.3, ease: "power2.inOut" },
-    });
+  useGSAP(
+    () => {
+      const tl = gsap.timeline({
+        defaults: { duration: 0.3, ease: "power2.inOut" },
+      });
 
-    if (isOpen) {
-      tl.to(line2Ref.current, { opacity: 0, duration: 0.25 })
-        .to(
+      if (isOpen) {
+        tl.to(line2Ref.current, { opacity: 0, duration: 0.25 })
+          .to(
+            line1Ref.current,
+            {
+              rotation: 45,
+              y: 8,
+              transformOrigin: "center center",
+              duration: 0.25,
+            },
+            0.25
+          )
+          .to(
+            line3Ref.current,
+            {
+              rotation: -45,
+              y: -8,
+              transformOrigin: "center center",
+              duration: 0.25,
+            },
+            0.25
+          );
+      } else {
+        tl.to(
           line1Ref.current,
-          {
-            rotation: 45,
-            y: 8,
-            transformOrigin: "center center",
-            duration: 0.25,
-          },
-          0.25
-        )
-        .to(
-          line3Ref.current,
-          {
-            rotation: -45,
-            y: -8,
-            transformOrigin: "center center",
-            duration: 0.25,
-          },
-          0.25
-        );
-    } else {
-      tl.to(
-        line1Ref.current,
-        {
-          rotation: 0,
-          y: 0,
-          transformOrigin: "center center",
-          duration: 0.25,
-        },
-        0
-      )
-        .to(
-          line3Ref.current,
           {
             rotation: 0,
             y: 0,
@@ -211,12 +206,25 @@ const CloseOrOpenMenu: React.FC<{ isOpen: boolean; onToggle: () => void }> = ({
           },
           0
         )
-        .to(line2Ref.current, { opacity: 1, duration: 0.25 }, 0.25);
-    }
-  }, [isOpen]);
+          .to(
+            line3Ref.current,
+            {
+              rotation: 0,
+              y: 0,
+              transformOrigin: "center center",
+              duration: 0.25,
+            },
+            0
+          )
+          .to(line2Ref.current, { opacity: 1, duration: 0.25 }, 0.25);
+      }
+    },
+    { scope: buttonRef, dependencies: [isOpen] }
+  );
 
   return (
     <button
+      ref={buttonRef}
       onClick={onToggle}
       className={cn(
         "flex rounded-full relative size-10 cursor-pointer transition-colors",

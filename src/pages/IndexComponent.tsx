@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import type { Link } from "@/interfaces";
 
@@ -7,62 +7,68 @@ interface Props {
 }
 
 const IndexComponent: React.FC<Props> = ({ links = [] }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    gsap.fromTo(
-      ".grid-bg",
-      { opacity: 0 },
-      { opacity: 1, duration: 1.5, ease: "power2.out" }
-    );
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        ".grid-bg",
+        { opacity: 0 },
+        { opacity: 1, duration: 1.5, ease: "power2.out" }
+      );
 
-    gsap.to(".title-word", {
-      opacity: 1,
-      y: 0,
-      duration: 0.8,
-      stagger: 0.1,
-      ease: "power3.out",
-      delay: 0.3,
-    });
+      gsap.to(".title-word", {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: "power3.out",
+        delay: 0.3,
+      });
 
-    gsap.to(".subtitle", {
-      opacity: 1,
-      duration: 1,
-      delay: 1.2,
-      ease: "power2.out",
-    });
+      gsap.to(".subtitle", {
+        opacity: 1,
+        duration: 1,
+        delay: 1.2,
+        ease: "power2.out",
+      });
 
-    gsap.to(".nav-title", {
-      opacity: 1,
-      duration: 0.8,
-      delay: 1.5,
-      ease: "power2.out",
-    });
+      gsap.to(".nav-title", {
+        opacity: 1,
+        duration: 0.8,
+        delay: 1.5,
+        ease: "power2.out",
+      });
 
-    gsap.to(".link-card", {
-      opacity: 1,
-      x: 0,
-      duration: 0.6,
-      stagger: 0.1,
-      delay: 1.7,
-      ease: "power2.out",
-    });
+      gsap.to(".link-card", {
+        opacity: 1,
+        x: 0,
+        duration: 0.6,
+        stagger: 0.1,
+        delay: 1.7,
+        ease: "power2.out",
+      });
 
-    gsap.to(".footer", {
-      opacity: 1,
-      duration: 1,
-      delay: 2.2,
-      ease: "power2.out",
-    });
+      gsap.to(".footer", {
+        opacity: 1,
+        duration: 1,
+        delay: 2.2,
+        ease: "power2.out",
+      });
 
-    gsap.to(".grid-bg", {
-      backgroundPosition: "100px 100px",
-      duration: 20,
-      repeat: -1,
-      ease: "none",
-    });
+      gsap.to(".grid-bg", {
+        backgroundPosition: "100px 100px",
+        duration: 20,
+        repeat: -1,
+        ease: "none",
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
   }, []);
 
   return (
-    <>
+    <div ref={containerRef}>
       <style>{`
         .grid-bg {
           background-image: linear-gradient(
@@ -148,7 +154,7 @@ const IndexComponent: React.FC<Props> = ({ links = [] }) => {
           </footer>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

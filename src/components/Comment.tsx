@@ -16,13 +16,16 @@ const Comment: React.FC<CommentProps> = ({
 }) => {
   const ref = useRef<HTMLDivElement | null>(null);
 
-  useGSAP(() => {
-    gsap.fromTo(
-      ref.current,
-      { opacity: 0, y: 6 },
-      { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }
-    );
-  }, []);
+  useGSAP(
+    () => {
+      gsap.fromTo(
+        ref.current,
+        { opacity: 0, y: 6 },
+        { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }
+      );
+    },
+    { scope: ref }
+  );
 
   if (variant === "inline") {
     return (
