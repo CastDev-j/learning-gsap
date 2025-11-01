@@ -17,13 +17,14 @@ const CreatingAnAnimation: React.FC<Props> = ({ rawCode }) => {
   const cubeRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const durationRef = useRef<HTMLDivElement>(null);
+  const baseSize = 96;
 
   useGSAP(() => {
     gsap.set(cubeRef.current, {
       backgroundColor: "#6366f1",
       x: 0,
-      width: 96,
-      height: 96,
+      width: baseSize,
+      height: baseSize,
     });
   }, []);
 
@@ -39,15 +40,17 @@ const CreatingAnAnimation: React.FC<Props> = ({ rawCode }) => {
     if (!cubeRef.current || !containerRef.current) return;
 
     const containerWidth = containerRef.current.offsetWidth;
-    const cubeWidth = cubeRef.current.offsetWidth;
-    const maxX = containerWidth - cubeWidth;
+    const objetiveWidth = baseSize * 0.75;
+    const maxX = containerWidth - objetiveWidth;
 
-    gsap.to(cubeRef.current, {
+    const tl = gsap.timeline();
+
+    tl.to(cubeRef.current, {
       x: maxX,
       ease: easing,
       backgroundColor: "#ec4899",
-      height: 140,
       duration: duration / 1000,
+      height: baseSize * 1.5,
     });
   }, [easing, duration]);
 
@@ -58,7 +61,8 @@ const CreatingAnAnimation: React.FC<Props> = ({ rawCode }) => {
       x: 0,
       ease: easing,
       backgroundColor: "#6366f1",
-      height: 96,
+      height: baseSize,
+      width: baseSize,
       duration: duration / 1000,
     });
   }, [easing, duration]);
@@ -82,7 +86,7 @@ const CreatingAnAnimation: React.FC<Props> = ({ rawCode }) => {
 
       <section ref={containerRef} className="w-full flex flex-col gap-6 ">
         <SelectEasing value={easing} onChange={setEasing} />
-        <div className="min-h-64 flex items-center  -z-10">
+        <div className="min-h-64 flex items-center -z-10">
           <div
             ref={cubeRef}
             className="size-24 rounded-lg shadow-2xl cursor-pointer select-none touch-none"
