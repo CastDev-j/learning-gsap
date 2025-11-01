@@ -31,7 +31,7 @@ const CreatingAnAnimation: React.FC<Props> = ({ rawCode }) => {
     if (!cubeRef.current || !containerRef.current) return;
 
     const containerWidth = containerRef.current.offsetWidth;
-    const objetiveWidth = baseSize * 0.75;
+    const objetiveWidth = baseSize;
     const maxX = containerWidth - objetiveWidth;
 
     gsap.to(cubeRef.current, {
@@ -39,7 +39,7 @@ const CreatingAnAnimation: React.FC<Props> = ({ rawCode }) => {
       ease: easing,
       backgroundColor: "#ec4899",
       duration: duration / 1000,
-      height: baseSize * 1.5,
+      height: baseSize,
     });
   }, [easing, duration]);
 
