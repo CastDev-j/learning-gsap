@@ -25,6 +25,12 @@ const CreatingAnAnimation: React.FC<Props> = ({ rawCode }) => {
       { opacity: 0, scale: 0.95 },
       { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.7)" }
     );
+
+    gsap.fromTo(
+      cubeRef.current,
+      { opacity: 0, scale: 0.95 },
+      { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.7)" }
+    );
   }, []);
 
   const handleRunAnimation = useCallback(() => {
@@ -83,6 +89,7 @@ const CreatingAnAnimation: React.FC<Props> = ({ rawCode }) => {
               width: baseSize,
               height: baseSize,
               backgroundColor: "#6366f1",
+              opacity: 0,
             }}
           />
         </div>

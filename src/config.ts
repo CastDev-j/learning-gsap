@@ -18,5 +18,9 @@ export const links: Link[] = [
     label: "Utilizando Staggers",
     url: "/exercises/using_staggers",
   },
+  {
+    label: "Utilizando Timelines",
+    url: "/exercises/using_timelines",
+  },
   ...testLinks,
 ];
