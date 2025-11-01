@@ -20,15 +20,6 @@ const CreatingAnAnimation: React.FC<Props> = ({ rawCode }) => {
   const baseSize = 96;
 
   useGSAP(() => {
-    gsap.set(cubeRef.current, {
-      backgroundColor: "#6366f1",
-      x: 0,
-      width: baseSize,
-      height: baseSize,
-    });
-  }, []);
-
-  useGSAP(() => {
     gsap.fromTo(
       durationRef.current,
       { opacity: 0, scale: 0.95 },
@@ -89,8 +80,12 @@ const CreatingAnAnimation: React.FC<Props> = ({ rawCode }) => {
         <div className="min-h-64 flex items-center -z-10">
           <div
             ref={cubeRef}
-            className="size-24 rounded-lg shadow-2xl cursor-pointer select-none touch-none"
-            style={{ viewTransitionName: "cube" }}
+            className="rounded-lg"
+            style={{
+              width: baseSize,
+              height: baseSize,
+              backgroundColor: "#6366f1",
+            }}
           />
         </div>
       </section>

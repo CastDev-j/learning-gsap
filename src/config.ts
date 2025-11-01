@@ -14,5 +14,9 @@ export const links: Link[] = [
     label: "Creando una animación",
     url: "/exercises/creating_an_animation",
   },
+  {
+    label: "Utilizando Staggers",
+    url: "/exercises/using_staggers",
+  },
   ...testLinks,
 ];
