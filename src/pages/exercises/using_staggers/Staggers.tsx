@@ -1,4 +1,10 @@
-import React, { useCallback, useLayoutEffect, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import { gsap } from "gsap";
 import Title from "@/components/Title";
 import Paragraph from "@/components/Paragraph";
@@ -26,20 +32,6 @@ const Staggers: React.FC<Props> = ({ rawCode }) => {
   const baseSize = 36;
   const [cubeAmount, setCubeAmount] = useState(0);
 
-  useLayoutEffect(() => {
-    const updateCubeAmount = () => {
-      if (containerRef.current) {
-        const containerWidth = containerRef.current.offsetWidth;
-        const newCubeAmount = Math.floor(containerWidth / baseSize) || 6;
-        setCubeAmount(newCubeAmount);
-      }
-    };
-
-    updateCubeAmount();
-    window.addEventListener("resize", updateCubeAmount);
-    return () => window.removeEventListener("resize", updateCubeAmount);
-  }, []);
-
   useGSAP(() => {
     gsap.fromTo(
       staggerRef.current,
@@ -52,6 +44,24 @@ const Staggers: React.FC<Props> = ({ rawCode }) => {
       { opacity: 0, scale: 0.95 },
       { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.7)" }
     );
+  }, []);
+
+  useLayoutEffect(() => {
+    const updateCubeAmount = () => {
+      if (containerRef.current) {
+        const containerWidth = containerRef.current.offsetWidth;
+        const newCubeAmount = Math.floor(containerWidth / baseSize) || 6;
+        setCubeAmount(newCubeAmount);
+      }
+    };
+
+    const timeoutId = setTimeout(updateCubeAmount, 400);
+
+    window.addEventListener("resize", updateCubeAmount);
+    return () => {
+      clearTimeout(timeoutId);
+      window.removeEventListener("resize", updateCubeAmount);
+    };
   }, []);
 
   const handleRunAnimation = useCallback(() => {
@@ -125,7 +135,7 @@ const Staggers: React.FC<Props> = ({ rawCode }) => {
               ref={(el) => {
                 if (el) cubeRefs.current[index] = el;
               }}
-              className="rounded-lg"
+              className="rounded-lg fade"
               style={{
                 width: baseSize,
                 height: baseSize,
