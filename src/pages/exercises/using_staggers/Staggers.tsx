@@ -78,6 +78,7 @@ const Staggers: React.FC<Props> = ({ rawCode }) => {
       stagger: {
         each: stagger / 1000,
         from: staggerFrom,
+        grid: "auto",
       },
     });
   }, [easing, duration, stagger, staggerFrom]);
@@ -90,10 +91,10 @@ const Staggers: React.FC<Props> = ({ rawCode }) => {
       ease: easing,
       backgroundColor: "#6366f1",
       duration: duration / 1000,
-      grid: "auto",
       stagger: {
         each: stagger / 1000,
         from: staggerFrom,
+        grid: "auto",
       },
     });
   }, [easing, duration, stagger, staggerFrom]);
