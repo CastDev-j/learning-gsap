@@ -6,6 +6,7 @@ import Paragraph from "@/components/Paragraph";
 import Remark from "@/components/Remark";
 import { useGSAP } from "@gsap/react";
 import Button from "@/components/Button";
+import Comment from "@/components/Comment";
 
 interface Props {
   rawCode?: string;
@@ -131,6 +132,8 @@ const UseGSAP: React.FC<Props> = ({ rawCode }) => {
           ></div>
         </div>
       </section>
+
+      <Comment>Toca el contenedor de la animación :3</Comment>
 
       <section className="flex gap-4 justify-center sm:justify-end w-full flex-wrap">
         <Button onClick={handlePlay} variant="secondary">
