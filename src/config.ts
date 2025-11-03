@@ -26,5 +26,9 @@ export const links: Link[] = [
     label: "Control y Callbacks",
     url: "/getting_started/control_and_callbacks",
   },
+  {
+    label: "Usando GSAP con React",
+    url: "/plugins/use_gsap",
+  },
   ...testLinks,
 ];

@@ -1,0 +1,9 @@
+---
+import Layout from "@/layout/Layout.astro";
+import UseGSAP from "./UseGSAP";
+import UseGSAPRaw from "./UseGSAP?raw";
+---
+
+<Layout title="Learning GSAP | Usando UseGSAP" centered>
+  <UseGSAP rawCode={UseGSAPRaw} client:load />
+</Layout>
