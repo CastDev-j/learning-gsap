@@ -55,6 +55,16 @@ const LayoutShift: React.FC<Props> = ({ rawCode }) => {
               (item) => item.id !== itemToRemove.id
             );
 
+            // works around a Safari rendering bug (unrelated to GSAP). Things reflow narrower otherwise.
+            // Force a small reflow by moving the last child to the end of the container
+            if (containerRef.current) {
+              const boxesContainer = containerRef.current;
+              const lastChild = boxesContainer.lastElementChild;
+              if (lastChild) {
+                boxesContainer.appendChild(lastChild);
+              }
+            }
+
             requestAnimationFrame(() => {
               Flip.from(state, {
                 duration: 0.15,
