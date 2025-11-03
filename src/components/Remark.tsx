@@ -36,7 +36,7 @@ const Remark: React.FC<RemarkProps> = ({
         "opacity-0 font-mono text-neutral-300",
         variant === "accent" &&
           "text-neutral-100 bg-neutral-900 px-1.5 py-0.5 rounded",
-        variant === "muted" && "text-neutral-500",
+        variant === "muted" && "text-neutral-400",
         className
       )}
     >

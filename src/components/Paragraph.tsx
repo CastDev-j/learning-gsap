@@ -33,9 +33,9 @@ const Paragraph: React.FC<ParagraphProps> = ({
     <p
       ref={ref}
       className={cn(
-        "opacity-0 leading-relaxed text-neutral-300",
-        variant === "lead" && "text-lg text-neutral-200 font-medium",
-        variant === "muted" && "text-neutral-500 text-sm",
+        "opacity-0 leading-relaxed text-neutral-200",
+        variant === "lead" && "text-lg text-neutral-100 font-medium",
+        variant === "muted" && "text-neutral-400 text-sm",
         className
       )}
     >

@@ -30,5 +30,13 @@ export const links: Link[] = [
     label: "Usando GSAP con React",
     url: "/plugins/use_gsap",
   },
+  {
+    label: "Usando AdvancedUseGSAP con React",
+    url: "/plugins/advanced_use_gsap",
+  },
+  {
+    label: "Usando LayoutShift con React",
+    url: "/plugins/layout_shift",
+  },
   ...testLinks,
 ];

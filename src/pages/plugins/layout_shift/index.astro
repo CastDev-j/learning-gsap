@@ -1,0 +1,9 @@
+---
+import Layout from "@/layout/Layout.astro";
+import LayoutShift from "./_LayoutShift";
+import LayoutShiftRaw from "./_LayoutShift?raw";
+---
+
+<Layout title="Learning GSAP | Usando LayoutShift" centered>
+  <LayoutShift rawCode={LayoutShiftRaw} client:load />
+</Layout>
