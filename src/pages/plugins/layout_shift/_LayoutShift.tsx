@@ -16,7 +16,7 @@ interface Item {
   color: string;
 }
 
-const BASE_SIZE = 68;
+const BASE_SIZE = 48;
 
 const LayoutShift: React.FC<Props> = ({ rawCode }) => {
   const containerRef = useRef<HTMLDivElement>(null);
