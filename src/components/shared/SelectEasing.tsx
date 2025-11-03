@@ -213,9 +213,7 @@ const SelectEasing: React.FC<SelectEasingProps> = ({
       ref={ref}
       className={cn("opacity-0 flex gap-3 items-center", className)}
     >
-      <span className="text-xs text-neutral-500 font-mono mr-auto">
-        {displayValue}
-      </span>
+      <span className="text-neutral-300 font-mono mr-auto">{displayValue}</span>
 
       <CustomSelect
         value={currentType}

@@ -137,10 +137,10 @@ const UseGSAP: React.FC<Props> = ({ rawCode }) => {
 
       <section className="flex gap-4 justify-center sm:justify-end w-full flex-wrap">
         <Button onClick={handlePlay} variant="secondary">
-          play()
+          Reproducir ()
         </Button>
         <Button onClick={handlePause} variant="secondary">
-          pause()
+          Pausar ()
         </Button>
       </section>
 

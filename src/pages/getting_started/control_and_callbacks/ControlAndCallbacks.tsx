@@ -86,19 +86,19 @@ const UsingTimeLines: React.FC<Props> = ({ rawCode }) => {
 
       <section className="flex gap-4 justify-center sm:justify-end w-full flex-wrap">
         <Button onClick={handlePlay} variant="secondary">
-          play()
+          Reproducir ()
         </Button>
         <Button onClick={handlePause} variant="secondary">
-          pause()
+          Pausar ()
         </Button>
         <Button onClick={handleResume} variant="secondary">
-          resume()
+          Reanudar ()
         </Button>
         <Button onClick={handleReverse} variant="secondary">
-          reverse()
+          Reversa ()
         </Button>
         <Button onClick={handleRestart} variant="secondary">
-          restart()
+          Reiniciar ()
         </Button>
       </section>
 

@@ -135,9 +135,7 @@ const SelectStaggerFrom: React.FC<SelectStaggerFromProps> = ({
       ref={ref}
       className={cn("opacity-0 flex gap-3 items-center", className)}
     >
-      <span className="text-xs text-neutral-500 font-mono mr-auto">
-        from: {value}
-      </span>
+      <span className="text-neutral-400 font-mono mr-auto">from: {value}</span>
 
       <CustomSelect
         value={value}
