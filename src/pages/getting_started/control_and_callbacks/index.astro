@@ -1,0 +1,9 @@
+---
+import Layout from "@/layout/Layout.astro";
+import ControlAndCallbacks from "./ControlAndCallbacks";
+import ControlAndCallbacksRaw from "./ControlAndCallbacks?raw";
+---
+
+<Layout title="Learning GSAP | Controls y Callbacks" centered>
+  <ControlAndCallbacks rawCode={ControlAndCallbacksRaw} client:load />
+</Layout>

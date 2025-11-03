@@ -12,15 +12,19 @@ export const links: Link[] = [
   },
   {
     label: "Creando una animación",
-    url: "/exercises/creating_an_animation",
+    url: "/getting_started/creating_an_animation",
   },
   {
     label: "Utilizando Staggers",
-    url: "/exercises/using_staggers",
+    url: "/getting_started/using_staggers",
   },
   {
     label: "Utilizando Timelines",
-    url: "/exercises/using_timelines",
+    url: "/getting_started/using_timelines",
+  },
+  {
+    label: "Control y Callbacks",
+    url: "/getting_started/control_and_callbacks",
   },
   ...testLinks,
 ];
