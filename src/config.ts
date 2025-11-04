@@ -34,5 +34,9 @@ export const links: Link[] = [
     label: "Usando LayoutShift con React",
     url: "/plugins/layout_shift",
   },
+  {
+    label: "Animando SVG",
+    url: "/plugins/svg",
+  },
   ...testLinks,
 ];

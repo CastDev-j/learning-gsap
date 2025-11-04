@@ -1,0 +1,9 @@
+---
+import Layout from "@/layout/Layout.astro";
+import SVG from "./_SVG";
+import SVGRaw from "./_SVG?raw";
+---
+
+<Layout title="Learning GSAP | Usando SVG" centered>
+  <SVG rawCode={SVGRaw} client:load />
+</Layout>
