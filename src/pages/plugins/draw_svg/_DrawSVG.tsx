@@ -20,25 +20,27 @@ const DrawSVG: React.FC<Props> = ({ rawCode }) => {
       gsap.registerPlugin(GSDevTools);
       gsap.registerPlugin(DrawSVGPlugin);
 
+      const letterPaths = splitPaths(".draw-text");
+      const heartPaths = splitPaths(".draw-me");
+
       timelineRef.current = gsap.timeline({
         repeat: -1,
+        ease: "power1.inOut",
       });
 
-      gsap.set(".draw-me, .draw-text", {
+      gsap.set([...heartPaths, ...letterPaths], {
         drawSVG: "0% live",
       });
 
       timelineRef.current
-        .to(".draw-me", {
+        .to(heartPaths, {
           drawSVG: "0% 100% live",
           duration: 4,
         })
-        .to(".draw-me", {
+        .to(heartPaths, {
           drawSVG: "100% 100% live",
           duration: 2,
         });
-
-      const letterPaths = splitPaths(".draw-text");
 
       timelineRef.current
         .to(
