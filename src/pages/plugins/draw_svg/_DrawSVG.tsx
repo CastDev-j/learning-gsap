@@ -87,8 +87,7 @@ const DrawSVG: React.FC<Props> = ({ rawCode }) => {
         ref={containerRef}
       >
         <svg
-          width="400"
-          height="279"
+          className="w-full h-auto max-w-md mx-auto"
           viewBox="0 0 400 279"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
