@@ -20,7 +20,6 @@ const DrawSVG: React.FC<Props> = ({ rawCode }) => {
       gsap.registerPlugin(DrawSVGPlugin);
 
       timelineRef.current = gsap.timeline({
-        ease: "power1.inOut",
         repeat: -1,
       });
 
@@ -44,6 +43,7 @@ const DrawSVG: React.FC<Props> = ({ rawCode }) => {
           {
             drawSVG: "0% 100%",
             duration: 4,
+            ease: "power1.in",
           },
           0
         )
