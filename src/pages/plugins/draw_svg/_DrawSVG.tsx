@@ -26,6 +26,7 @@ const DrawSVG: React.FC<Props> = ({ rawCode }) => {
       timelineRef.current = gsap.timeline({
         repeat: -1,
         ease: "power1.inOut",
+        defaults: { stagger: 0.1 },
       });
 
       gsap.set([...heartPaths, ...letterPaths], {
@@ -39,6 +40,7 @@ const DrawSVG: React.FC<Props> = ({ rawCode }) => {
         })
         .to(heartPaths, {
           drawSVG: "100% 100% live",
+          delay: 2,
           duration: 2,
         });
 
@@ -55,6 +57,7 @@ const DrawSVG: React.FC<Props> = ({ rawCode }) => {
           letterPaths,
           {
             drawSVG: "100% 100% live",
+            delay: 2,
             duration: 2,
           },
           4
