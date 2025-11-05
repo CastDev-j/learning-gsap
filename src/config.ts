@@ -38,5 +38,9 @@ export const links: Link[] = [
     label: "Animando SVG",
     url: "/plugins/svg",
   },
+  {
+    label: "Draw SVG",
+    url: "/plugins/draw_svg",
+  },
   ...testLinks,
 ];
