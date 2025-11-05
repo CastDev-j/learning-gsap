@@ -1,0 +1,9 @@
+---
+import Layout from "@/layout/Layout.astro";
+import MorphSVG from "./_MorphSVG";
+import MorphSVGRaw from "./_MorphSVG?raw";
+---
+
+<Layout title="Learning GSAP | Usando MorphSVG" centered>
+  <MorphSVG rawCode={MorphSVGRaw} client:load />
+</Layout>

@@ -117,7 +117,7 @@ const DrawSVG: React.FC<Props> = ({ rawCode }) => {
         </svg>
       </section>
 
-      {rawCode && <CodeBlock codeTitle="SVG.tsx">{rawCode}</CodeBlock>}
+      {rawCode && <CodeBlock codeTitle="DrawSVG.tsx">{rawCode}</CodeBlock>}
     </div>
   );
 };

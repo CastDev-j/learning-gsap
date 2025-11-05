@@ -36,11 +36,15 @@ export const links: Link[] = [
   },
   {
     label: "Animando SVG",
-    url: "/plugins/svg",
+    url: "/plugins/svg_plugin/svg",
   },
   {
     label: "Draw SVG",
-    url: "/plugins/draw_svg",
+    url: "/plugins/svg_plugin/draw_svg",
+  },
+  {
+    label: "Morph SVG",
+    url: "/plugins/svg_plugin/morph_svg",
   },
   ...testLinks,
 ];
