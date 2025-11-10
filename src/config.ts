@@ -46,5 +46,9 @@ export const links: Link[] = [
     label: "Morph SVG",
     url: "/plugins/svg_plugin/morph_svg",
   },
+  {
+    label: "Motion Path",
+    url: "/plugins/svg_plugin/motion_path",
+  },
   ...testLinks,
 ];

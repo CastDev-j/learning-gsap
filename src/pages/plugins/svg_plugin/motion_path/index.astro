@@ -1,0 +1,9 @@
+---
+import Layout from "@/layout/Layout.astro";
+import MotionPath from "./_MotionPath";
+import MotionPathRaw from "./_MotionPath?raw";
+---
+
+<Layout title="Learning GSAP | Usando MotionPath" centered>
+  <MotionPath rawCode={MotionPathRaw} client:load />
+</Layout>
