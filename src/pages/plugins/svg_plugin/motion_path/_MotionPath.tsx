@@ -23,6 +23,8 @@ const MotionPath: React.FC<Props> = ({ rawCode }) => {
         xPercent: -50,
         yPercent: -50,
         transformOrigin: "50% 50%",
+        willChange: "transform",
+        force3D: true,
       });
 
       timelineRef.current.to(".rect", {
@@ -30,19 +32,17 @@ const MotionPath: React.FC<Props> = ({ rawCode }) => {
         motionPath: {
           path: ".path",
           align: ".path",
-          curviness: 100,
+          alignOrigin: [0.5, 0.5],
           autoRotate: true,
           start: 0,
           end: 1,
         },
         onStart: () => {
-          gsap.to(".rect", { opacity: 1 });
+          gsap.to(".rect", { opacity: 1, duration: 0.3 });
         },
       });
 
       timelineRef.current.repeat(-1).yoyo(true);
-
-      // MotionPathHelper.create(".rect", { selected: true });
 
       GSDevTools.create({
         animation: timelineRef.current,
@@ -85,17 +85,19 @@ const MotionPath: React.FC<Props> = ({ rawCode }) => {
             opacity="0.8"
           />
 
-          <foreignObject
-            x="0"
-            y="0"
-            width="60"
-            height="60"
+          <g
             className="rect"
-            style={{ opacity: 0, position: "absolute", top: 0, left: 0 }}
+            style={{
+              opacity: 0,
+            }}
           >
             <svg
+              x="-50"
+              y="-50"
+              width="100"
+              height="100"
               viewBox="0 0 24 24"
-              className="rotate-90 scale-150"
+              className="rotate-90"
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
@@ -103,7 +105,7 @@ const MotionPath: React.FC<Props> = ({ rawCode }) => {
                 fill="#6366f1"
               ></path>
             </svg>
-          </foreignObject>
+          </g>
         </svg>
       </section>
 
