@@ -50,5 +50,9 @@ export const links: Link[] = [
     label: "Motion Path",
     url: "/plugins/svg_plugin/motion_path",
   },
+  {
+    label: "ScrollTrigger",
+    url: "/plugins/scroll/scroll_trigger",
+  },
   ...testLinks,
 ];
