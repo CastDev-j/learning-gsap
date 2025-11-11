@@ -1,7 +1,12 @@
 import React, { useRef, useState } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
-import { MotionPathHelper, MotionPathPlugin, ScrollTrigger } from "gsap/all";
+import {
+  DrawSVGPlugin,
+  MotionPathHelper,
+  MotionPathPlugin,
+  ScrollTrigger,
+} from "gsap/all";
 
 const ScrollTriggerComponent = () => {
   const containerRef = useRef<HTMLDivElement>(null!);
@@ -10,7 +15,12 @@ const ScrollTriggerComponent = () => {
 
   useGSAP(
     () => {
-      gsap.registerPlugin(MotionPathPlugin, MotionPathHelper, ScrollTrigger);
+      gsap.registerPlugin(
+        MotionPathPlugin,
+        MotionPathHelper,
+        ScrollTrigger,
+        DrawSVGPlugin
+      );
 
       if (scrollTriggerRef.current) {
         scrollTriggerRef.current.kill();
@@ -26,20 +36,27 @@ const ScrollTriggerComponent = () => {
         force3D: true,
       });
 
-      timelineRef.current.to(".rect", {
-        duration: 1,
-        motionPath: {
-          path: ".path",
-          align: ".path",
-          alignOrigin: [0.5, 0.5],
-          autoRotate: 90,
-          start: 0,
-          end: 1,
+      timelineRef.current.set(".draw-path", { drawSVG: "0%" });
+
+      timelineRef.current.to(".draw-path", { drawSVG: "0% 100% live" }, 0);
+
+      timelineRef.current.to(
+        ".rect",
+        {
+          motionPath: {
+            path: ".path",
+            align: ".path",
+            alignOrigin: [0.5, 0.5],
+            autoRotate: 90,
+            start: 0,
+            end: 1,
+          },
+          onStart: () => {
+            gsap.to(".rect", { opacity: 1, duration: 0.3 });
+          },
         },
-        onStart: () => {
-          gsap.to(".rect", { opacity: 1, duration: 0.3 });
-        },
-      });
+        0
+      );
 
       scrollTriggerRef.current = ScrollTrigger.create({
         trigger: containerRef.current,
@@ -50,11 +67,12 @@ const ScrollTriggerComponent = () => {
         scrub: 5,
         animation: timelineRef.current,
         start: "top top",
-        end: "+=300%",
+        end: "+=500%",
         onUpdate: (self) => {
-          const additionalRotation = self.direction === -1 ? 180 : 0;
-          gsap.set(".rect", {
-            rotation: `+=${additionalRotation}`,
+          gsap.to(".icon", {
+            rotation: self.direction === 1 ? 0 : 180,
+            transformOrigin: "-50% -50%",
+            duration: 0.3,
           });
         },
       });
@@ -97,6 +115,16 @@ const ScrollTriggerComponent = () => {
             opacity="0.8"
           />
 
+          <path
+            className="draw-path"
+            d="M-247.084,-138.75001 C-225.64555,-144.50056 671.433,-258.40501 880.96,-138.57501 1035.004,-50.47501 -299.406,-112.95601 -239.584,-1.25401 -182.901,104.57399 543.808,-128.10801 864.165,14.99699 1072.339,107.98999 -111.918,-3.37401 -204.583,92.49699 -324.582,216.66799 739.167,98.33699 846.664,157.49999 897.08,245.40699 -103.16,102.99399 -195.629,255.41699 -233.6474,318.08589 1072.488,197.92299 776.121,294.04699 640.348,338.08399 -282.674,317.21499 -308.361,363.93199 -318.639,382.61959 724.201,273.92499 805.245,453.26999 812.941,470.30299 775.74,705.58499 639.308,526.54299 577.90875,445.97624 612.989,102.50899 525.005,-68.03201 453.017,-207.56401 315.651,-265.45701 233.099,-219.63501 148.419,-172.63101 220.276,657.57399 223.622,659.35599 "
+            stroke="#6366f1"
+            strokeWidth="10"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            fill="none"
+          />
+
           <g
             className="rect"
             style={{
@@ -104,6 +132,7 @@ const ScrollTriggerComponent = () => {
             }}
           >
             <svg
+              className="icon"
               x="-50"
               y="-50"
               width="100"
