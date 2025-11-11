@@ -60,7 +60,7 @@ const ScrollTriggerComponent = () => {
 
       scrollTriggerRef.current = ScrollTrigger.create({
         trigger: containerRef.current,
-        markers: true,
+        // markers: true,
         pin: true,
         pinSpacing: true,
         anticipatePin: 1,
