@@ -33,7 +33,7 @@ const MotionPath: React.FC<Props> = ({ rawCode }) => {
           path: ".path",
           align: ".path",
           alignOrigin: [0.5, 0.5],
-          autoRotate: true,
+          autoRotate: 90,
           start: 0,
           end: 1,
         },
@@ -97,7 +97,6 @@ const MotionPath: React.FC<Props> = ({ rawCode }) => {
               width="100"
               height="100"
               viewBox="0 0 24 24"
-              className="rotate-90"
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
