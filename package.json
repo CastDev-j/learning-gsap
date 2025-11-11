@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "astro dev --host",
     "build": "astro build",
+    "webkit": "playwright open --browser webkit localhost:4321",
     "preview": "astro preview",
     "astro": "astro"
   },
