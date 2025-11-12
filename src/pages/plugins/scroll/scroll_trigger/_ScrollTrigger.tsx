@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import {
@@ -7,11 +7,13 @@ import {
   MotionPathPlugin,
   ScrollTrigger,
 } from "gsap/all";
+import Lenis from "lenis";
 
 const ScrollTriggerComponent = () => {
   const containerRef = useRef<HTMLDivElement>(null!);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
   const scrollTriggerRef = useRef<ScrollTrigger | null>(null);
+  const lenisRef = useRef<Lenis | null>(null);
 
   useGSAP(
     () => {
@@ -21,6 +23,20 @@ const ScrollTriggerComponent = () => {
         ScrollTrigger,
         DrawSVGPlugin
       );
+
+      if (!lenisRef.current) {
+        lenisRef.current = new Lenis({
+          duration: 1.2,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          smoothWheel: true,
+        });
+
+        lenisRef.current.on("scroll", ScrollTrigger.update);
+
+        gsap.ticker.add((time) => {
+          lenisRef.current?.raf(time * 1000);
+        });
+      }
 
       if (scrollTriggerRef.current) {
         scrollTriggerRef.current.kill();
@@ -38,7 +54,11 @@ const ScrollTriggerComponent = () => {
 
       timelineRef.current.set(".draw-path", { drawSVG: "0%" });
 
-      timelineRef.current.to(".draw-path", { drawSVG: "0% 100% live" }, 0);
+      timelineRef.current.to(
+        ".draw-path",
+        { drawSVG: "0% 100%", ease: "none" },
+        0
+      );
 
       timelineRef.current.to(
         ".rect",
@@ -51,6 +71,7 @@ const ScrollTriggerComponent = () => {
             start: 0,
             end: 1,
           },
+          ease: "none",
           onStart: () => {
             gsap.to(".rect", { opacity: 1, duration: 0.3 });
           },
@@ -64,7 +85,7 @@ const ScrollTriggerComponent = () => {
         pin: true,
         pinSpacing: true,
         anticipatePin: 1,
-        scrub: 5,
+        scrub: 1,
         animation: timelineRef.current,
         start: "top top",
         end: "+=500%",
@@ -72,15 +93,32 @@ const ScrollTriggerComponent = () => {
           const rotation = self.direction === 1 ? 0 : 180;
           gsap.to(".icon", {
             attr: { transform: `rotate(${rotation} 12 12)` },
-            duration: 0,
+            duration: 0.3,
+            overwrite: "auto",
           });
         },
       });
 
-      // MotionPathHelper.create(".rect");
+      return () => {
+        if (scrollTriggerRef.current) {
+          scrollTriggerRef.current.kill();
+        }
+        if (timelineRef.current) {
+          timelineRef.current.kill();
+        }
+      };
     },
     { scope: containerRef }
   );
+
+  React.useEffect(() => {
+    return () => {
+      if (lenisRef.current) {
+        lenisRef.current.destroy();
+        lenisRef.current = null;
+      }
+    };
+  }, []);
 
   return (
     <main className="flex flex-col items-center justify-center gap-8 px-4 max-w-4xl w-full">

@@ -51,6 +51,10 @@ export const links: Link[] = [
     url: "/plugins/svg_plugin/motion_path",
   },
   {
+    label: "Usando ScrollSmoother",
+    url: "/plugins/scroll/first_example",
+  },
+  {
     label: "ScrollTrigger",
     url: "/plugins/scroll/scroll_trigger",
   },
