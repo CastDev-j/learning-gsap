@@ -7,13 +7,11 @@ import {
   MotionPathPlugin,
   ScrollTrigger,
 } from "gsap/all";
-import Lenis from "lenis";
 
 const ScrollTriggerComponent = () => {
   const containerRef = useRef<HTMLDivElement>(null!);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
   const scrollTriggerRef = useRef<ScrollTrigger | null>(null);
-  const lenisRef = useRef<Lenis | null>(null);
 
   useGSAP(
     () => {
@@ -23,20 +21,6 @@ const ScrollTriggerComponent = () => {
         ScrollTrigger,
         DrawSVGPlugin
       );
-
-      if (!lenisRef.current) {
-        lenisRef.current = new Lenis({
-          duration: 1.2,
-          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-          smoothWheel: true,
-        });
-
-        lenisRef.current.on("scroll", ScrollTrigger.update);
-
-        gsap.ticker.add((time) => {
-          lenisRef.current?.raf(time * 1000);
-        });
-      }
 
       if (scrollTriggerRef.current) {
         scrollTriggerRef.current.kill();
@@ -110,15 +94,6 @@ const ScrollTriggerComponent = () => {
     },
     { scope: containerRef }
   );
-
-  React.useEffect(() => {
-    return () => {
-      if (lenisRef.current) {
-        lenisRef.current.destroy();
-        lenisRef.current = null;
-      }
-    };
-  }, []);
 
   return (
     <main className="flex flex-col items-center justify-center gap-8 px-4 max-w-4xl w-full">
