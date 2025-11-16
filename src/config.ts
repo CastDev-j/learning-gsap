@@ -58,5 +58,9 @@ export const links: Link[] = [
     label: "ScrollTrigger",
     url: "/plugins/scroll/scroll_trigger",
   },
+  {
+    label: "Flip Animation",
+    url: "/plugins/flip",
+  },
   ...testLinks,
 ];
